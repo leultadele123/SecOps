@@ -57,7 +57,7 @@ const Navbar = () => {
       "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
       scrolled ? "bg-slate-950/80 backdrop-blur-md border-slate-800 py-4" : "bg-transparent border-transparent py-6"
     )}>
-      <div className="container mx-auto px-6 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Shield className="w-6 h-6 text-blue-400" />
           <span className="font-mono font-bold tracking-tighter text-xl">LEUL.TADELE</span>
@@ -81,24 +81,20 @@ const Hero = () => (
     <div className="absolute inset-0 z-0 opacity-20" 
          style={{ backgroundImage: 'radial-gradient(#1e293b 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
     
-    <div className="container mx-auto px-6 relative z-10">
-      <div className="max-w-4xl">
+    <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-4xl mx-auto lg:mx-0">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-500/30 rounded-full text-blue-400 text-xs font-mono mb-6">
-            <Activity className="w-3 h-3 animate-pulse" />
-            SYSTEMS_ONLINE: SOC_ANALYST_V2.5
-          </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight text-white">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6 leading-tight text-white">
             SOC Analyst <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
               & Detection Engineer
             </span>
           </h1>
-          <p className="text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed">
+          <p className="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed">
             Hands-on experience in monitoring, detecting, and responding to cyber threats in real-time. 
             Specializing in high-pressure SOC environments using Splunk, Wazuh, and Cortex XSOAR 
             to reduce risk and automate security workflows.
@@ -141,7 +137,7 @@ const Hero = () => (
 
 const About = () => (
   <section id="about" className="py-24 bg-slate-950/50">
-    <div className="container mx-auto px-6">
+    <div className="max-w-7xl mx-auto px-6">
       <div className="max-w-4xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -166,7 +162,7 @@ const About = () => (
             </p>
           </div>
           
-          <div className="grid grid-cols-2 gap-6 mt-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
             <div className="p-4 bg-slate-900/50 border border-slate-800 rounded">
               <div className="text-2xl font-bold text-blue-400 mb-1">SIEM</div>
               <div className="text-xs text-slate-500 uppercase tracking-wider">Splunk ES & Wazuh</div>
@@ -201,7 +197,7 @@ const SkillCategory = ({ title, skills, icon: Icon }: { title: string, skills: s
 
 const Skills = () => (
   <section id="skills" className="py-24">
-    <div className="container mx-auto px-6">
+    <div className="max-w-7xl mx-auto px-6">
       <div className="text-center max-w-2xl mx-auto mb-16">
         <h2 className="text-sm font-mono text-blue-400 mb-4 tracking-widest uppercase">02. Expertise</h2>
         <h3 className="text-3xl md:text-4xl font-bold mb-4">Core Technical Stack</h3>
@@ -327,7 +323,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="py-24 bg-slate-950/50">
-      <div className="container mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div className="max-w-2xl">
             <h2 className="text-sm font-mono text-blue-400 mb-4 tracking-widest uppercase">03. Portfolio</h2>
@@ -401,7 +397,7 @@ const Experience = () => {
 
   return (
     <section id="experience" className="py-24 bg-slate-950/50">
-      <div className="container mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="grid lg:grid-cols-3 gap-16">
           <div className="lg:col-span-1">
             <h2 className="text-sm font-mono text-blue-400 mb-4 tracking-widest uppercase">05. Career</h2>
@@ -453,7 +449,7 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-24">
-      <div className="container mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6">
         <div className="max-w-4xl mx-auto bg-slate-900/50 border border-slate-800 rounded-3xl p-8 md:p-16 relative overflow-hidden">
           {/* Decorative background circle */}
           <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl"></div>
@@ -547,7 +543,7 @@ const Contact = () => {
 
 const Footer = () => (
   <footer className="py-12 border-t border-slate-900">
-    <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
+    <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
       <div className="flex items-center gap-2">
         <Shield className="w-5 h-5 text-blue-400" />
         <span className="font-mono font-bold tracking-tighter text-lg">LEUL.TADELE</span>
@@ -678,13 +674,54 @@ const ChatAssistant = () => {
 
 export default function App() {
   useEffect(() => {
-    // Track website loaded event in GTM
-    if (typeof window !== 'undefined' && (window as any).dataLayer) {
-      (window as any).dataLayer.push({
-        event: 'website_loaded',
-        timestamp: new Date().toISOString()
-      });
-    }
+    // Track website loaded event in GTM with enhanced metadata
+    const trackLoad = async () => {
+      if (typeof window !== 'undefined' && (window as any).dataLayer) {
+        const getOS = () => {
+          const userAgent = window.navigator.userAgent;
+          if (userAgent.indexOf("Win") !== -1) return "Windows";
+          if (userAgent.indexOf("Mac") !== -1) return "MacOS";
+          if (userAgent.indexOf("X11") !== -1) return "UNIX";
+          if (userAgent.indexOf("Linux") !== -1) return "Linux";
+          if (/Android/.test(userAgent)) return "Android";
+          if (/iPhone|iPad|iPod/.test(userAgent)) return "iOS";
+          return "Unknown";
+        };
+
+        let locationData = {};
+        try {
+          // Fetch IP and location info from a public API
+          const response = await fetch('https://ipapi.co/json/');
+          if (response.ok) {
+            const data = await response.json();
+            locationData = {
+              ip: data.ip,
+              city: data.city,
+              region: data.region,
+              country: data.country_name,
+              isp: data.org
+            };
+          }
+        } catch (error) {
+          console.warn("Could not fetch location data:", error);
+        }
+
+        (window as any).dataLayer.push({
+          event: 'website_loaded',
+          timestamp: new Date().toISOString(),
+          device_info: {
+            os: getOS(),
+            screen_resolution: `${window.screen.width}x${window.screen.height}`,
+            viewport_size: `${window.innerWidth}x${window.innerHeight}`,
+            browser_language: window.navigator.language,
+            user_agent: window.navigator.userAgent
+          },
+          ...locationData
+        });
+      }
+    };
+
+    trackLoad();
   }, []);
 
   return (
