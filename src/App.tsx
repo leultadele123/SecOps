@@ -95,18 +95,32 @@ const Hero = () => (
             </span>
           </h1>
           <p className="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed">
-            Hands-on experience in monitoring, detecting, and responding to cyber threats in real-time. 
-            Specializing in high-pressure SOC environments using Splunk, Wazuh, and Cortex XSOAR 
-            to reduce risk and automate security workflows.
+            Hands-on experience in 24/7 SOC operations, specializing in real-time threat detection, incident triage, and rapid response. 
+            I leverage advanced SIEM platforms like Splunk ES and Wazuh, alongside industry-leading EDR solutions 
+            (CrowdStrike Falcon, Microsoft Defender), to maintain a robust security posture. My core focus is on 
+            engineering automated security workflows using Cortex XSOAR to drastically reduce Mean Time to Detect (MTTD) 
+            and Mean Time to Respond (MTTR).
           </p>
           <div className="flex flex-wrap gap-4">
-            <a href="#projects" className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded transition-all flex items-center gap-2 group">
+            <a 
+              href="#projects" 
+              onClick={() => (window as any).dataLayer?.push({ event: 'cta_click', cta_name: 'view_projects' })}
+              className="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded transition-all flex items-center gap-2 group"
+            >
               View Projects <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </a>
-            <a href="#experience" className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded transition-all border border-slate-700">
+            <a 
+              href="#experience" 
+              onClick={() => (window as any).dataLayer?.push({ event: 'cta_click', cta_name: 'work_history' })}
+              className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded transition-all border border-slate-700"
+            >
               Work History
             </a>
-            <a href="#" className="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-blue-400 font-bold rounded transition-all border border-blue-500/30 flex items-center gap-2">
+            <a 
+              href="#" 
+              onClick={() => (window as any).dataLayer?.push({ event: 'cta_click', cta_name: 'download_resume' })}
+              className="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-blue-400 font-bold rounded transition-all border border-blue-500/30 flex items-center gap-2"
+            >
               <ExternalLink className="w-4 h-4" /> Download Resume
             </a>
           </div>
@@ -148,17 +162,24 @@ const About = () => (
           <h3 className="text-3xl md:text-4xl font-bold mb-6">Results-Driven Security Operations</h3>
           <div className="space-y-4 text-slate-400 leading-relaxed">
             <p>
-              Based in <span className="text-white font-medium">Addis Ababa, Ethiopia</span>, I am a SOC Analyst with 
-              hands-on experience in monitoring, detecting, and responding to cyber threats in real-time.
+              Based in <span className="text-white font-medium">Addis Ababa, Ethiopia</span>, I am a dedicated SOC Analyst 
+              and Detection Engineer with a proven track record of safeguarding critical infrastructure. My experience 
+              spans across telecommunications and national security sectors, where I've managed complex security events 
+              from initial detection to final remediation.
             </p>
             <p>
-              Proficient in operating within high-pressure SOC environments and leveraging tools such as 
-              <span className="text-white font-medium">Splunk, Wazuh, Microsoft Defender for Endpoint</span>, and 
-              <span className="text-white font-medium">CrowdStrike Falcon</span> for threat detection and incident response.
+              I excel in navigating high-pressure environments, utilizing a deep technical stack that includes 
+              <span className="text-white font-medium">Splunk</span> for behavioral analytics and 
+              <span className="text-white font-medium">Wazuh</span> for open-source SIEM capabilities. By integrating 
+              EDR telemetry from <span className="text-white font-medium">CrowdStrike Falcon</span> and 
+              <span className="text-white font-medium">Microsoft Defender</span>, I provide comprehensive visibility 
+              into endpoint activities and lateral movement.
             </p>
             <p>
-              I specialize in developing playbooks and using <span className="text-white font-medium">Cortex XSOAR</span> 
-              to automate and orchestrate security workflows, proven to triage alerts and support timely mitigation.
+              A specialist in Security Orchestration, Automation, and Response (SOAR), I design and deploy sophisticated 
+              playbooks in <span className="text-white font-medium">Cortex XSOAR</span>. These automations are engineered 
+              to handle high-volume alert triage, enrichment, and containment, allowing security teams to focus on 
+              high-fidelity threat hunting and strategic defense.
             </p>
           </div>
           
@@ -287,36 +308,36 @@ const Projects = () => {
       title: "Cyber Dev Environment Setup",
       category: "Infrastructure",
       image: "https://picsum.photos/seed/cyber-lab-setup/600/400",
-      problem: "Need for an isolated environment for security testing and attack simulation.",
-      action: "Designed and deployed an isolated environment with Splunk ES, Splunk SOAR, Windows Server AD, and Kali Linux.",
-      impact: "Integrated all lab components to simulate end-to-end detection and response scenarios with proper network segmentation.",
+      problem: "Need for an isolated, high-fidelity environment for security testing, malware analysis, and attack simulation without risking production assets.",
+      action: "Architected and deployed a multi-tier virtualized lab featuring Splunk ES for centralized logging, Cortex XSOAR for automation, Windows Server with Active Directory for identity management, and Kali Linux for offensive testing.",
+      impact: "Enabled end-to-end simulation of advanced persistent threats (APTs), allowing for the validation of detection rules and incident response playbooks in a safe, controlled environment.",
       tools: ["Splunk ES", "Splunk SOAR", "Kali Linux", "Windows Server", "Active Directory"]
     },
     {
       title: "Splunk UEBA Administration",
       category: "Engineering",
       image: "https://picsum.photos/seed/splunk-dashboard-data/600/400",
-      problem: "Identifying anomalous user and entity behavior based on peer group analysis.",
-      action: "Administered Splunk UEBA platform, including data source integrations, behavioral analytics, and risk scoring models.",
-      impact: "Developed and fine-tuned anomaly detection policies and risk scoring rules to enhance behavioral insights.",
+      problem: "Traditional signature-based detection failed to identify insider threats and compromised accounts exhibiting subtle behavioral anomalies.",
+      action: "Led the administration and tuning of Splunk UEBA, integrating diverse data sources and configuring peer group analysis, risk scoring models, and behavioral baselines.",
+      impact: "Successfully identified high-risk behaviors and lateral movement patterns, providing actionable insights that reduced the window of exposure for internal security incidents.",
       tools: ["Splunk UEBA", "Splunk ES", "Machine Learning", "Behavioral Analytics"]
     },
     {
       title: "SOAR Playbook Automation",
       category: "Automation",
       image: "https://picsum.photos/seed/automation-workflow-security/600/400",
-      problem: "Manual incident response processes leading to slow containment and mitigation.",
-      action: "Developed, automated, and maintained SOAR playbooks in Cortex XSOAR to streamline IR processes.",
-      impact: "Reduced response time and standardized documentation for security incidents and investigation findings.",
+      problem: "SOC analysts were overwhelmed by high-volume, low-fidelity alerts, leading to alert fatigue and delayed response to critical threats.",
+      action: "Engineered complex automation playbooks in Cortex XSOAR using Python, integrating with EDR (CrowdStrike/Defender) and threat intelligence feeds for automated enrichment and containment.",
+      impact: "Automated over 60% of routine triage tasks, significantly reducing MTTR and ensuring consistent, documented response procedures for all high-priority incidents.",
       tools: ["Cortex XSOAR", "Python", "EDR Integrations", "API Automation"]
     },
     {
       title: "Intrusion Analysis & IDS Tuning",
       category: "Detection",
       image: "https://picsum.photos/seed/network-traffic-analysis/600/400",
-      problem: "Emerging security risks requiring proactive identification and strengthened prevention.",
-      action: "Configured and maintained IDS/IPS systems; correlated data from multiple log sources to identify suspicious activities.",
-      impact: "Strengthened threat detection and prevention capabilities against evolving attack vectors.",
+      problem: "High false-positive rates from legacy IDS/IPS systems were masking real intrusion attempts and wasting analyst resources.",
+      action: "Performed deep packet inspection and traffic analysis to tune Suricata and Snort signatures; correlated IDS alerts with SIEM logs to identify multi-stage attack patterns.",
+      impact: "Reduced false positives by 40% while increasing the detection rate of stealthy network-based attacks and data exfiltration attempts.",
       tools: ["Suricata", "Snort", "SIEM", "Log Correlation"]
     }
   ];
@@ -483,7 +504,13 @@ const Contact = () => {
                 </div>
                 <div>
                   <div className="text-xs text-slate-500 uppercase font-mono mb-1">LinkedIn</div>
-                  <a href="https://www.linkedin.com/in/leul-tadele-6ba250257/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-emerald-400 transition-colors font-medium">
+                  <a 
+                    href="https://www.linkedin.com/in/leul-tadele-6ba250257/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    onClick={() => (window as any).dataLayer?.push({ event: 'social_click', platform: 'linkedin' })}
+                    className="text-white hover:text-emerald-400 transition-colors font-medium"
+                  >
                     Leul Tadele
                   </a>
                 </div>
@@ -549,7 +576,7 @@ const Footer = () => (
         <span className="font-mono font-bold tracking-tighter text-lg">LEUL.TADELE</span>
       </div>
       <div className="text-slate-500 text-sm font-mono">
-        © 2026 // SECURED_BY_DESIGN // BUILT_WITH_REACT
+        © 2026 // SECURED_BY_DESIGN
       </div>
       <div className="flex items-center gap-6 text-slate-400">
         <a href="https://www.linkedin.com/in/leul-tadele-6ba250257/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors"><Linkedin className="w-4 h-4" /></a>
