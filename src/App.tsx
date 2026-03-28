@@ -82,7 +82,7 @@ const Hero = () => (
          style={{ backgroundImage: 'radial-gradient(#1e293b 1px, transparent 1px)', backgroundSize: '40px 40px' }}></div>
     
     <div className="max-w-7xl mx-auto px-6 relative z-10">
-      <div className="max-w-4xl mx-auto lg:mx-0">
+      <div className="max-w-4xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -152,7 +152,7 @@ const Hero = () => (
 const About = () => (
   <section id="about" className="py-24 bg-slate-950/50">
     <div className="max-w-7xl mx-auto px-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -219,7 +219,7 @@ const SkillCategory = ({ title, skills, icon: Icon }: { title: string, skills: s
 const Skills = () => (
   <section id="skills" className="py-24">
     <div className="max-w-7xl mx-auto px-6">
-      <div className="text-center max-w-2xl mx-auto mb-16">
+      <div className="max-w-2xl mb-16">
         <h2 className="text-sm font-mono text-blue-400 mb-4 tracking-widest uppercase">02. Expertise</h2>
         <h3 className="text-3xl md:text-4xl font-bold mb-4">Core Technical Stack</h3>
         <p className="text-slate-400">Deep technical proficiency in the tools and methodologies that power modern security operations centers.</p>
