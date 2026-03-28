@@ -41,29 +41,6 @@ import { cn } from './lib/utils';
 import { getSecurityAssistantResponse } from './services/gemini';
 
 // --- Mock Data for Dashboard ---
-const alertData = [
-  { time: '00:00', alerts: 45, automated: 12 },
-  { time: '04:00', alerts: 32, automated: 10 },
-  { time: '08:00', alerts: 89, automated: 45 },
-  { time: '12:00', alerts: 124, automated: 78 },
-  { time: '16:00', alerts: 98, automated: 56 },
-  { time: '20:00', alerts: 67, automated: 34 },
-];
-
-const threatDistribution = [
-  { name: 'Phishing', value: 40, color: '#3b82f6' },
-  { name: 'Malware', value: 25, color: '#10b981' },
-  { name: 'Brute Force', value: 20, color: '#f59e0b' },
-  { name: 'Exfiltration', value: 15, color: '#ef4444' },
-];
-
-const mttdData = [
-  { month: 'Jan', mttd: 120 },
-  { month: 'Feb', mttd: 110 },
-  { month: 'Mar', mttd: 85 },
-  { month: 'Apr', mttd: 45 }, // Automation impact
-  { month: 'May', mttd: 38 },
-];
 
 // --- Components ---
 
@@ -90,6 +67,7 @@ const Navbar = () => {
           <a href="#skills" className="hover:text-blue-400 transition-colors">SKILLS</a>
           <a href="#projects" className="hover:text-blue-400 transition-colors">PROJECTS</a>
           <a href="#experience" className="hover:text-blue-400 transition-colors">EXPERIENCE</a>
+          <a href="#" className="hover:text-blue-400 transition-colors">RESUME</a>
           <a href="#contact" className="px-4 py-2 bg-blue-600/10 border border-blue-500/50 text-blue-400 rounded hover:bg-blue-600/20 transition-all">CONTACT</a>
         </div>
       </div>
@@ -131,6 +109,9 @@ const Hero = () => (
             </a>
             <a href="#experience" className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-white font-bold rounded transition-all border border-slate-700">
               Work History
+            </a>
+            <a href="#" className="px-8 py-4 bg-slate-900 hover:bg-slate-800 text-blue-400 font-bold rounded transition-all border border-blue-500/30 flex items-center gap-2">
+              <ExternalLink className="w-4 h-4" /> Download Resume
             </a>
           </div>
         </motion.div>
@@ -367,104 +348,6 @@ const Projects = () => {
   );
 };
 
-const DashboardSection = () => (
-  <section className="py-24">
-    <div className="container mx-auto px-6">
-      <div className="text-center max-w-2xl mx-auto mb-16">
-        <h2 className="text-sm font-mono text-blue-400 mb-4 tracking-widest uppercase">04. Visualizing Impact</h2>
-        <h3 className="text-3xl md:text-4xl font-bold mb-4">Operational Metrics</h3>
-        <p className="text-slate-400">Data-driven insights that enable executive decision-making and tactical improvements.</p>
-      </div>
-
-      <div className="grid lg:grid-cols-3 gap-8">
-        {/* Chart 1: Alert Volume vs Automation */}
-        <div className="lg:col-span-2 p-8 bg-slate-900/50 border border-slate-800 rounded-2xl">
-          <div className="flex items-center justify-between mb-8">
-            <h4 className="font-bold flex items-center gap-2">
-              <Activity className="w-4 h-4 text-blue-400" />
-              Alert Triage Efficiency (24h)
-            </h4>
-            <div className="flex items-center gap-4 text-[10px] font-mono uppercase tracking-widest">
-              <div className="flex items-center gap-1.5"><div className="w-2 h-2 bg-blue-500 rounded-full"></div> Total</div>
-              <div className="flex items-center gap-1.5"><div className="w-2 h-2 bg-emerald-500 rounded-full"></div> Automated</div>
-            </div>
-          </div>
-          <div className="h-[300px] w-full">
-            <ResponsiveContainer width="100%" height="100%">
-              <AreaChart data={alertData}>
-                <defs>
-                  <linearGradient id="colorAlerts" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
-                  </linearGradient>
-                  <linearGradient id="colorAuto" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
-                    <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
-                  </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                <XAxis dataKey="time" stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
-                <YAxis stroke="#64748b" fontSize={12} tickLine={false} axisLine={false} />
-                <Tooltip 
-                  contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }}
-                  itemStyle={{ fontSize: '12px' }}
-                />
-                <Area type="monotone" dataKey="alerts" stroke="#3b82f6" fillOpacity={1} fill="url(#colorAlerts)" strokeWidth={2} />
-                <Area type="monotone" dataKey="automated" stroke="#10b981" fillOpacity={1} fill="url(#colorAuto)" strokeWidth={2} />
-              </AreaChart>
-            </ResponsiveContainer>
-          </div>
-          <p className="mt-6 text-xs text-slate-500 italic leading-relaxed">
-            * This dashboard visualizes the impact of SOAR playbooks on high-volume alerts. 
-            Automated triage handles repetitive verification, freeing analysts for complex investigations.
-          </p>
-        </div>
-
-        {/* Chart 2: Threat Distribution */}
-        <div className="p-8 bg-slate-900/50 border border-slate-800 rounded-2xl flex flex-col">
-          <h4 className="font-bold flex items-center gap-2 mb-8">
-            <PieChart className="w-4 h-4 text-emerald-400" />
-            Threat Vector Distribution
-          </h4>
-          <div className="h-[250px] w-full flex-grow">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={threatDistribution}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={80}
-                  paddingAngle={5}
-                  dataKey="value"
-                >
-                  {threatDistribution.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip 
-                  contentStyle={{ backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '8px' }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
-          <div className="space-y-3 mt-4">
-            {threatDistribution.map((item, i) => (
-              <div key={i} className="flex items-center justify-between text-xs">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full" style={{ backgroundColor: item.color }}></div>
-                  <span className="text-slate-400">{item.name}</span>
-                </div>
-                <span className="font-mono font-bold">{item.value}%</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-);
-
 const ExperienceItem = ({ exp }: any) => (
   <div className="relative pl-8 pb-12 border-l border-slate-800 last:pb-0">
     <div className="absolute left-[-5px] top-0 w-[9px] h-[9px] bg-blue-500 rounded-full border-2 border-slate-950"></div>
@@ -555,37 +438,112 @@ const Experience = () => {
   );
 };
 
-const Contact = () => (
-  <section id="contact" className="py-24">
-    <div className="container mx-auto px-6">
-      <div className="max-w-4xl mx-auto bg-slate-900/50 border border-slate-800 rounded-3xl p-8 md:p-16 text-center relative overflow-hidden">
-        {/* Decorative background circle */}
-        <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl"></div>
-        
-        <h2 className="text-sm font-mono text-blue-400 mb-4 tracking-widest uppercase">06. Get In Touch</h2>
-        <h3 className="text-4xl md:text-5xl font-bold mb-8">Ready to Secure Your Perimeter?</h3>
-        <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto">
-          I'm currently open to discussing mid-level SOC Analyst, Detection Engineering, 
-          or Security Automation roles. Let's connect and talk strategy.
-        </p>
-        
-        <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-          <a href="mailto:leult.tadele@gmail.com" className="w-full md:w-auto px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-3">
-            <Mail className="w-5 h-5" /> leult.tadele@gmail.com
-          </a>
-          <div className="flex items-center gap-4">
-            <div className="px-4 py-4 bg-slate-800 text-white rounded-lg border border-slate-700 font-mono text-sm">
-              +251707955027
+const Contact = () => {
+  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simulate form submission
+    console.log('Form submitted:', formState);
+    setIsSubmitted(true);
+    setTimeout(() => setIsSubmitted(false), 5000);
+    setFormState({ name: '', email: '', message: '' });
+  };
+
+  return (
+    <section id="contact" className="py-24">
+      <div className="container mx-auto px-6">
+        <div className="max-w-4xl mx-auto bg-slate-900/50 border border-slate-800 rounded-3xl p-8 md:p-16 relative overflow-hidden">
+          {/* Decorative background circle */}
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-blue-600/10 rounded-full blur-3xl"></div>
+          
+          <div className="text-center mb-12">
+            <h2 className="text-sm font-mono text-blue-400 mb-4 tracking-widest uppercase">05. Get In Touch</h2>
+            <h3 className="text-4xl md:text-5xl font-bold mb-6 text-white">Ready to Secure Your Perimeter?</h3>
+            <p className="text-lg text-slate-400 max-w-2xl mx-auto">
+              I'm currently open to discussing mid-level SOC Analyst, Detection Engineering, 
+              or Security Automation roles. Let's connect and talk strategy.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-12">
+            <div className="space-y-8">
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-blue-500/10 rounded-lg border border-blue-500/20">
+                  <Mail className="w-6 h-6 text-blue-400" />
+                </div>
+                <div>
+                  <div className="text-xs text-slate-500 uppercase font-mono mb-1">Email</div>
+                  <a href="mailto:leult.tadele@gmail.com" className="text-white hover:text-blue-400 transition-colors font-medium">
+                    leult.tadele@gmail.com
+                  </a>
+                </div>
+              </div>
+              
+              <div className="flex items-start gap-4">
+                <div className="p-3 bg-emerald-500/10 rounded-lg border border-emerald-500/20">
+                  <Linkedin className="w-6 h-6 text-emerald-400" />
+                </div>
+                <div>
+                  <div className="text-xs text-slate-500 uppercase font-mono mb-1">LinkedIn</div>
+                  <a href="https://www.linkedin.com/in/leul-tadele-6ba250257/" target="_blank" rel="noopener noreferrer" className="text-white hover:text-emerald-400 transition-colors font-medium">
+                    Leul Tadele
+                  </a>
+                </div>
+              </div>
+
+              <div className="p-6 bg-slate-950/50 border border-slate-800 rounded-xl">
+                <div className="text-xs text-slate-500 uppercase font-mono mb-4">Direct Line</div>
+                <div className="text-2xl font-bold text-white">+251 707 955 027</div>
+              </div>
             </div>
-            <a href="#" className="p-4 bg-slate-800 hover:bg-slate-700 text-white rounded-lg border border-slate-700 transition-all">
-              <Linkedin className="w-6 h-6" />
-            </a>
+
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <input 
+                  type="text" 
+                  placeholder="Your Name"
+                  required
+                  value={formState.name}
+                  onChange={(e) => setFormState({...formState, name: e.target.value})}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+                />
+              </div>
+              <div>
+                <input 
+                  type="email" 
+                  placeholder="Your Email"
+                  required
+                  value={formState.email}
+                  onChange={(e) => setFormState({...formState, email: e.target.value})}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition-colors"
+                />
+              </div>
+              <div>
+                <textarea 
+                  placeholder="Your Message"
+                  required
+                  rows={4}
+                  value={formState.message}
+                  onChange={(e) => setFormState({...formState, message: e.target.value})}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-lg px-4 py-3 text-sm focus:outline-none focus:border-blue-500 transition-colors resize-none"
+                ></textarea>
+              </div>
+              <button 
+                type="submit"
+                className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg transition-all flex items-center justify-center gap-2"
+              >
+                {isSubmitted ? <CheckCircle2 className="w-5 h-5" /> : <Zap className="w-5 h-5" />}
+                {isSubmitted ? 'Message Sent!' : 'Send Message'}
+              </button>
+            </form>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const Footer = () => (
   <footer className="py-12 border-t border-slate-900">
@@ -598,9 +556,9 @@ const Footer = () => (
         © 2026 // SECURED_BY_DESIGN // BUILT_WITH_REACT
       </div>
       <div className="flex items-center gap-6 text-slate-400">
-        <a href="#" className="hover:text-blue-400 transition-colors"><Linkedin className="w-4 h-4" /></a>
-        <a href="#" className="hover:text-blue-400 transition-colors"><Github className="w-4 h-4" /></a>
-        <a href="#" className="hover:text-blue-400 transition-colors"><Mail className="w-4 h-4" /></a>
+        <a href="https://www.linkedin.com/in/leul-tadele-6ba250257/" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors"><Linkedin className="w-4 h-4" /></a>
+        <a href="https://github.com/LEUL-SEC" target="_blank" rel="noopener noreferrer" className="hover:text-blue-400 transition-colors"><Github className="w-4 h-4" /></a>
+        <a href="mailto:leult.tadele@gmail.com" className="hover:text-blue-400 transition-colors"><Mail className="w-4 h-4" /></a>
       </div>
     </div>
   </footer>
@@ -736,7 +694,6 @@ export default function App() {
       <About />
       <Skills />
       <Projects />
-      <DashboardSection />
       <Experience />
       <Contact />
       <Footer />
