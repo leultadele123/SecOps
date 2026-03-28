@@ -38,8 +38,6 @@ import {
 } from 'recharts';
 import { cn } from './lib/utils';
 
-import { getSecurityAssistantResponse } from './services/gemini';
-
 // --- Mock Data for Dashboard ---
 
 // --- Components ---
@@ -95,11 +93,9 @@ const Hero = () => (
             </span>
           </h1>
           <p className="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl leading-relaxed">
-            Hands-on experience in 24/7 SOC operations, specializing in real-time threat detection, incident triage, and rapid response. 
-            I leverage advanced SIEM platforms like Splunk ES and Wazuh, alongside industry-leading EDR solutions 
-            (CrowdStrike Falcon, Microsoft Defender), to maintain a robust security posture. My core focus is on 
-            engineering automated security workflows using Cortex XSOAR to drastically reduce Mean Time to Detect (MTTD) 
-            and Mean Time to Respond (MTTR).
+            Hands-on experience in 24/7 SOC operations, specializing in real-time threat detection, incident triage, and rapid response. I leverage advanced SIEM platforms such as <span className="text-white font-medium">Splunk Enterprise Security (ES)</span> and <span className="text-white font-medium">Wazuh</span>, along with industry-leading EDR solutions (<span className="text-white font-medium">CrowdStrike Falcon</span> and <span className="text-white font-medium">Microsoft Defender</span>) and UEBA tools like <span className="text-white font-medium">Splunk UEBA</span> to maintain a strong security posture.
+            <br /><br />
+            My core focus is on engineering automated security workflows using <span className="text-white font-medium">Cortex XSOAR</span> to significantly reduce Mean Time to Detect (MTTD) and Mean Time to Respond (MTTR).
           </p>
           <div className="flex flex-wrap gap-4">
             <a 
@@ -162,24 +158,13 @@ const About = () => (
           <h3 className="text-3xl md:text-4xl font-bold mb-6">Results-Driven Security Operations</h3>
           <div className="space-y-4 text-slate-400 leading-relaxed">
             <p>
-              Based in <span className="text-white font-medium">Addis Ababa, Ethiopia</span>, I am a dedicated SOC Analyst 
-              and Detection Engineer with a proven track record of safeguarding critical infrastructure. My experience 
-              spans across telecommunications and national security sectors, where I've managed complex security events 
-              from initial detection to final remediation.
+              Based in <span className="text-white font-medium">Addis Ababa, Ethiopia</span>, I am a dedicated SOC Analyst and Detection Engineer with a proven track record of protecting critical infrastructure. My experience spans the telecommunications and national security sectors, where I have managed complex security events from initial detection to final remediation.
             </p>
             <p>
-              I excel in navigating high-pressure environments, utilizing a deep technical stack that includes 
-              <span className="text-white font-medium">Splunk</span> for behavioral analytics and 
-              <span className="text-white font-medium">Wazuh</span> for open-source SIEM capabilities. By integrating 
-              EDR telemetry from <span className="text-white font-medium">CrowdStrike Falcon</span> and 
-              <span className="text-white font-medium">Microsoft Defender</span>, I provide comprehensive visibility 
-              into endpoint activities and lateral movement.
+              I work effectively in high-pressure environments and use a strong technical stack, including <span className="text-white font-medium">Splunk Enterprise Security</span> as a SIEM platform. For endpoint detection and response (EDR), I utilize <span className="text-white font-medium">CrowdStrike Falcon</span> and <span className="text-white font-medium">Microsoft Defender</span> to monitor endpoint activity. For behavioral analysis and insider threat detection, I use <span className="text-white font-medium">Splunk UEBA</span> to identify anomalies and lateral movement.
             </p>
             <p>
-              A specialist in Security Orchestration, Automation, and Response (SOAR), I design and deploy sophisticated 
-              playbooks in <span className="text-white font-medium">Cortex XSOAR</span>. These automations are engineered 
-              to handle high-volume alert triage, enrichment, and containment, allowing security teams to focus on 
-              high-fidelity threat hunting and strategic defense.
+              I also specialize in Security Orchestration, Automation, and Response (SOAR). I design and deploy advanced playbooks in <span className="text-white font-medium">Cortex XSOAR</span> to automate alert triage, enrichment, and containment. These automations help security teams manage high volumes of alerts and focus on high-priority threat hunting and strategic defense.
             </p>
           </div>
           
@@ -229,7 +214,7 @@ const Skills = () => (
         <SkillCategory 
           title="SIEM & Log Analysis" 
           icon={Search}
-          skills={["Splunk Enterprise Security (ES)", "Wazuh", "Use-case development", "Dashboarding", "SPL optimization"]} 
+          skills={["Splunk Enterprise Security (ES)", "Wazuh", "UEBA", "Use-case development", "Dashboarding"]} 
         />
         <SkillCategory 
           title="SOAR & Automation" 
@@ -350,10 +335,6 @@ const Projects = () => {
             <h2 className="text-sm font-mono text-blue-400 mb-4 tracking-widest uppercase">03. Portfolio</h2>
             <h3 className="text-3xl md:text-4xl font-bold mb-4">High-Impact Projects</h3>
             <p className="text-slate-400">Real-world solutions engineered to solve critical security gaps and optimize SOC performance.</p>
-          </div>
-          <div className="flex items-center gap-2 text-blue-400 font-mono text-sm">
-            <Github className="w-5 h-5" />
-            <span>GITHUB.COM/LEUL-SEC</span>
           </div>
         </div>
 
@@ -587,118 +568,6 @@ const Footer = () => (
   </footer>
 );
 
-const ChatAssistant = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [messages, setMessages] = useState<{ role: 'user' | 'ai', text: string }[]>([
-    { role: 'ai', text: "Hello! I'm Leul's Security Assistant. Ask me anything about his experience or certifications." }
-  ]);
-  const [input, setInput] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-
-  const resumeContext = `
-    Name: Leul Tadele
-    Role: SOC Analyst & Detection Engineer
-    Experience: 
-    - Safaricom Telecommunications (Jan 2025 - Present): SOC Analyst, Splunk ES, Cortex XSOAR, EDR (CrowdStrike/Defender).
-    - INSA (Sep 2022 - Dec 2024): Intrusion Analyst, SIEM monitoring, IDS/IPS configuration.
-    Skills: SIEM (Splunk, Wazuh), SOAR (Cortex XSOAR), EDR, Python, Bash, Threat Hunting.
-    Certifications: CompTIA CySA+, Palo Alto PCSAE, Ethical Hacker Essentials (EHE), Fortinet.
-    Education: B.Sc. Electrical Engineering & Computing (ASTU), GPA 3.70.
-  `;
-
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
-
-    const userMsg = input.trim();
-    setInput('');
-    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
-    setIsLoading(true);
-
-    const response = await getSecurityAssistantResponse(userMsg, resumeContext);
-    
-    setMessages(prev => [...prev, { role: 'ai', text: response }]);
-    setIsLoading(false);
-  };
-
-  return (
-    <div className="fixed bottom-6 right-6 z-50">
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="absolute bottom-20 right-0 w-[350px] max-w-[90vw] bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
-          >
-            {/* Header */}
-            <div className="p-4 bg-blue-600 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <Cpu className="w-5 h-5 text-white" />
-                <span className="font-bold text-sm text-white">Security AI Assistant</span>
-              </div>
-              <button onClick={() => setIsOpen(false)} className="text-white/80 hover:text-white">
-                <ChevronRight className="w-5 h-5 rotate-90" />
-              </button>
-            </div>
-
-            {/* Messages */}
-            <div className="flex-grow h-[350px] overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-slate-700">
-              {messages.map((msg, i) => (
-                <div key={i} className={cn(
-                  "max-w-[85%] p-3 rounded-xl text-sm leading-relaxed",
-                  msg.role === 'user' 
-                    ? "bg-blue-600 text-white ml-auto rounded-tr-none" 
-                    : "bg-slate-800 text-slate-200 mr-auto rounded-tl-none border border-slate-700"
-                )}>
-                  {msg.text}
-                </div>
-              ))}
-              {isLoading && (
-                <div className="bg-slate-800 text-slate-200 mr-auto rounded-xl rounded-tl-none border border-slate-700 p-3 flex gap-1">
-                  <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce"></span>
-                  <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce [animation-delay:0.2s]"></span>
-                  <span className="w-1.5 h-1.5 bg-blue-400 rounded-full animate-bounce [animation-delay:0.4s]"></span>
-                </div>
-              )}
-            </div>
-
-            {/* Input */}
-            <div className="p-4 border-t border-slate-800 bg-slate-950">
-              <div className="flex gap-2">
-                <input 
-                  type="text" 
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-                  placeholder="Ask about Leul..."
-                  className="flex-grow bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-500 transition-colors"
-                />
-                <button 
-                  onClick={handleSend}
-                  disabled={isLoading}
-                  className="bg-blue-600 p-2 rounded-lg hover:bg-blue-700 transition-colors disabled:opacity-50"
-                >
-                  <Zap className="w-4 h-4 text-white" />
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <button 
-        onClick={() => setIsOpen(!isOpen)}
-        className={cn(
-          "w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-all duration-300",
-          isOpen ? "bg-slate-800 rotate-90" : "bg-blue-600 hover:bg-blue-700 hover:scale-110"
-        )}
-      >
-        {isOpen ? <ChevronRight className="w-6 h-6 text-white" /> : <Cpu className="w-6 h-6 text-white" />}
-      </button>
-    </div>
-  );
-};
-
 export default function App() {
   useEffect(() => {
     // Track website loaded event in GTM with enhanced metadata
@@ -761,7 +630,6 @@ export default function App() {
       <Experience />
       <Contact />
       <Footer />
-      <ChatAssistant />
     </div>
   );
 }
