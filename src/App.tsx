@@ -719,6 +719,16 @@ const ChatAssistant = () => {
 };
 
 export default function App() {
+  useEffect(() => {
+    // Track website loaded event in GTM
+    if (typeof window !== 'undefined' && (window as any).dataLayer) {
+      (window as any).dataLayer.push({
+        event: 'website_loaded',
+        timestamp: new Date().toISOString()
+      });
+    }
+  }, []);
+
   return (
     <div className="min-h-screen selection:bg-blue-500/30 selection:text-blue-200">
       <Navbar />
